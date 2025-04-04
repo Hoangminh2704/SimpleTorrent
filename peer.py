@@ -32,24 +32,6 @@ def request_piece_from_tracker(piece):
 import requests
 import hashlib
 
-# import socket
-
-# # Hàm để đăng ký các pieces mới với tracker
-# def register_pieces_with_tracker(pieces):
-#     tracker_host = "localhost"  # Hoặc tên của Docker container nếu sử dụng Docker
-#     tracker_port = 8000  # Cổng tracker
-
-#     try:
-#         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-#             s.connect((tracker_host, tracker_port))
-#             message = f"REGISTER:Peer:{','.join(pieces)}"  # Gửi các pieces lên tracker
-#             s.send(message.encode())
-#             response = s.recv(1024).decode()
-#             print(f"Phản hồi từ tracker: {response}")
-#     except Exception as e:
-#         print(f"Lỗi khi kết nối đến tracker: {e}")
-
-
 
 
 def calculate_hash(data):
@@ -76,17 +58,7 @@ def download_piece(node, piece_name):
         print(f"Exception khi tải {piece_name}: {e}")
 
 
-# Tải một phần file từ node khác
-# def download_piece(node, piece):
-#     host, port = node.split(":")
-#     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-#         s.connect((host, int(port)))
-#         s.send(piece.encode())
-#         data = s.recv(1024)
-#         piece_path = os.path.join(PIECES_DIR, piece)
-#         with open(piece_path, "wb") as f:
-#             f.write(data)
-#         print(f"Downloaded {piece} from {node}")
+
 
 # Upload phần file cho node khác
 def handle_upload_request(conn):
