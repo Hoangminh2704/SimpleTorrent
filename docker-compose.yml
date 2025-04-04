@@ -1,0 +1,46 @@
+
+services:
+  tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile.tracker
+    ports:
+      - "8001:8000"  # Tracker sẽ lắng nghe trên cổng 8000
+    networks:
+      - p2p_network
+    volumes:
+      - ./files:/app/files  # Gắn volume để lưu files
+
+  peer1:
+    build:
+      context: .
+      dockerfile: Dockerfile.peer
+    networks:
+      - p2p_network
+    environment:
+      - TRACKER_HOST=tracker  # Tên dịch vụ Docker cho tracker
+      - TRACKER_PORT=8000  # Peer sẽ kết nối đến tracker qua cổng 8000
+
+  peer2:
+    build:
+      context: .
+      dockerfile: Dockerfile.peer
+    networks:
+      - p2p_network
+    environment:
+      - TRACKER_HOST=tracker
+      - TRACKER_PORT=8000
+
+  peer3:
+    build:
+      context: .
+      dockerfile: Dockerfile.peer
+    networks:
+      - p2p_network
+    environment:
+      - TRACKER_HOST=tracker
+      - TRACKER_PORT=8000
+
+networks:
+  p2p_network:
+    driver: bridge

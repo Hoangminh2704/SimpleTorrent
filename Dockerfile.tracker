@@ -1,0 +1,16 @@
+# Sử dụng Python base image
+FROM python:3.9-slim
+
+# Thiết lập thư mục làm việc
+WORKDIR /app
+
+# Sao chép file tracker vào container
+COPY tracker.py .
+COPY utils.py .
+COPY requirements.txt .
+
+# Cài đặt các thư viện Python cần thiết
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Lệnh chạy tracker
+CMD ["python", "tracker.py"]
